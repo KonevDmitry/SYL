@@ -17,7 +17,7 @@ public class UserRestController {
     private UserService userService;
 
     @RequestMapping(value = "/users/get_all", method = RequestMethod.GET)
-    public String getPersons(Model model) {
+    public List<UserModel> getPersons(Model model) {
 
         List<UserModel> users = userService.getAll();
         model.addAttribute("users", users);
@@ -26,7 +26,7 @@ public class UserRestController {
 
         //энес, ну тут это, фронт должен быть, но чё-то впадлу :D
 
-        return "personspage";
+        return users;
     }
 
 }
