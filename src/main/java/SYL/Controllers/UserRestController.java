@@ -5,10 +5,8 @@ import java.util.List;
 import SYL.Models.UserModel;
 import SYL.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 public class UserRestController {
@@ -16,17 +14,19 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/users/get_all", method = RequestMethod.GET)
-    public List<UserModel> getPersons(Model model) {
+    //ATTENTION!!! Users plans not printed to json, but easily could be got by getters
+    // I have no idea how to edit it to json
 
+    @RequestMapping(value = "/users/get_all", method = RequestMethod.GET, produces = {"application/json"})
+    public @ResponseBody
+    List<UserModel> getPersons() {
         List<UserModel> users = userService.getAll();
-        model.addAttribute("users", users);
-
-        // This will resolve to /WEB-INF/jsp/personspage.jsp
-
-        //энес, ну тут это, фронт должен быть, но чё-то впадлу :D
-
         return users;
     }
 
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = {"application/json"})
+    public @ResponseBody
+    UserModel getPerson(@PathVariable("id") int id) {
+        return userService.getUserByID(id);
+    }
 }

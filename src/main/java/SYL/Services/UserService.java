@@ -2,6 +2,7 @@ package SYL.Services;
 
 
 import SYL.Dao.UserDao;
+import SYL.Models.PlanModel;
 import SYL.Models.UserModel;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +13,8 @@ public class UserService {
 
     private UserDao usersDao = new UserDao();
 
-    public UserModel findUser(int id) {
-        return usersDao.findById(id);
+    public UserModel getUserByID(int id) {
+        return usersDao.getByID(id);
     }
 
     public void saveUser(UserModel user) {
@@ -24,9 +25,17 @@ public class UserService {
         usersDao.delete(user);
     }
 
-    public void updateUser(UserModel user) {
-        usersDao.update(user);
+    public void updateInfo(UserModel user) {
+        usersDao.updateInfo(user);
     }
 
-    public List<UserModel> getAll() {return usersDao.getAll();}
+    public int login(String email, String password) {
+        return usersDao.login(email, password);
+    }
+
+    public List<UserModel> getAll() {
+        return usersDao.getAll();
+    }
+
+    public void updatePlan(UserModel user, PlanModel plan){usersDao.updatePlan(user,plan);}
 }
