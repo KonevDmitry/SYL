@@ -1,9 +1,12 @@
 package SYL.Models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 
 import javax.persistence.*;
@@ -18,6 +21,10 @@ import java.util.List;
 @Getter
 @Setter
 
+@TypeDef(
+        name = "list-array",
+        typeClass = ListArrayType.class
+)
 public class PlanModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PLAN_PLAN_ID_seq")
@@ -25,12 +32,18 @@ public class PlanModel {
     private long id;
 
     @NonNull
+    @Column(name = "cost")
+    private Integer cost;
+
+    @NonNull
     @Column(name = "desc")
     private String desc;
 
-    @NonNull
-    @Column(name = "cost")
-    private Integer cost;
+
+    @CollectionTable(name="plans", joinColumns=@JoinColumn(name="id"))
+    @Column(name="priveleges", columnDefinition = "text array")
+    @Type(type = "list-array")
+    private List<String> priveleges;
 
     @JsonManagedReference
     @OneToMany(
@@ -40,5 +53,6 @@ public class PlanModel {
             cascade = CascadeType.PERSIST,
             orphanRemoval = true
     )
+
     private List<UserModel> users = new ArrayList<>();
 }

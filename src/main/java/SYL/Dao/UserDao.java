@@ -19,6 +19,8 @@ public class UserDao {
     public void save(UserModel user) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
+        if (user.getType() == null)
+            user.setType("user");
         session.save(user);
         tx1.commit();
         session.close();
@@ -32,10 +34,10 @@ public class UserDao {
         session.close();
     }
 
-    public void delete(UserModel user) {
+    public void delete(long id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-
+        UserModel user = getByID(id);
         PlanModel userPlan = user.getPlan();
 
         userPlan.getUsers().remove(user);
@@ -52,7 +54,7 @@ public class UserDao {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
 
         List<UserModel> res = session.createNativeQuery("SELECT u.id, u.name, " +
-                "u.surname, u.email, u.password, u.plan_id FROM sylschema.users u", UserModel.class)
+                "u.surname, u.email, u.password, u.plan_id,u.type FROM sylschema.users u", UserModel.class)
                 .getResultList();
         return res;
     }
@@ -79,12 +81,26 @@ public class UserDao {
         Transaction tx1 = session.beginTransaction();
 
         PlanModel userPlan = user.getPlan();
+        if(userPlan!=null)
+            userPlan.getUsers().remove(user);
 
-        userPlan.getUsers().remove(user);
         user.setPlan(newPlan);
+        session.flush();
+
         newPlan.getUsers().add(user);
         session.merge(user);
         tx1.commit();
         session.close();
+    }
+
+    public UserModel getByEmail(String email) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        UserModel user = session.createNativeQuery("SELECT u.id, u.name, " +
+                "u.surname, u.email, u.password, u.plan_id,u.type FROM sylschema.users u" +
+                " WHERE u.email LIKE ?1", UserModel.class)
+                .setParameter(1, email)
+                .getSingleResult();
+        return user;
     }
 }

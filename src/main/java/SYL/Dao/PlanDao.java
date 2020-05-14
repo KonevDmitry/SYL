@@ -49,6 +49,43 @@ public class PlanDao {
         List<PlanModel> res = session.createNativeQuery("SELECT p.id, p.desc, p.cost" +
                 " FROM sylschema.plans p", PlanModel.class)
                 .getResultList();
+
+        session.flush();
+        session.close();
         return res;
+    }
+
+    public void addPrivelege(PlanModel plan, String privelege) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        List<String> priveleges = plan.getPriveleges();
+        priveleges.add(privelege);
+        String privs = priveleges.toString();
+        privs = "{" + privs.substring(1, privs.length() - 1) + "}";
+        session.createNativeQuery("UPDATE sylschema.plans SET priveleges = " +
+                " CAST(?1 AS text[])" +
+                " WHERE id = ?2")
+                .setParameter(1, privs)
+                .setParameter(2, plan.getId())
+                .executeUpdate();
+        session.close();
+    }
+
+    public void deletePrivelege(PlanModel plan, String privelege) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        List<String> priveleges = plan.getPriveleges();
+
+        priveleges.remove(privelege);
+        String privs = priveleges.toString();
+
+        privs = "{" + privs.substring(1, privs.length() - 1) + "}";
+        session.createNativeQuery("UPDATE sylschema.plans SET priveleges = " +
+                " CAST(?1 AS text[])" +
+                " WHERE id = ?2")
+                .setParameter(1, privs)
+                .setParameter(2, plan.getId())
+                .executeUpdate();
+        session.close();
     }
 }

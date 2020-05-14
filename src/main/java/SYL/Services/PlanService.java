@@ -29,4 +29,8 @@ public class PlanService {
     public List<PlanModel> getAll(){
         return planDAO.getAll();
     }
+
+    public void addPrivelege(PlanModel plan, String privelege){planDAO.addPrivelege(plan, privelege);}
+
+    public void deletePrivelege(PlanModel plan, String privelege){planDAO.deletePrivelege(plan, privelege);}
 }

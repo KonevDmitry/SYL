@@ -49,9 +49,13 @@ public class UserModel {
     @Column(name = "password", columnDefinition = "bytea")
     private String password;
 
+    @NonNull
+    @Column(name = "type")
+    private String type;
+
     @JsonBackReference
     @Fetch(FetchMode.JOIN)
-    @ManyToOne(fetch = FetchType.LAZY,
+    @ManyToOne(fetch = FetchType.EAGER,
                 cascade = CascadeType.ALL)
     @JoinColumn(name = "plan_id")
 

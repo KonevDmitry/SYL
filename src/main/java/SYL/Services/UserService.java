@@ -21,8 +21,8 @@ public class UserService {
         usersDao.save(user);
     }
 
-    public void deleteUser(UserModel user) {
-        usersDao.delete(user);
+    public void deleteUser(long id) {
+        usersDao.delete(id);
     }
 
     public void updateInfo(UserModel user) {
@@ -38,4 +38,8 @@ public class UserService {
     }
 
     public void updatePlan(UserModel user, PlanModel plan){usersDao.updatePlan(user,plan);}
+
+    public UserModel loggedUser(String email) {
+        return usersDao.getByEmail(email);
+    }
 }
