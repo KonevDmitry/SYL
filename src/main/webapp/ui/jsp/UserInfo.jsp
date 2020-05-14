@@ -11,7 +11,7 @@
             <div class="col-md-4 text-center"><strong>Surname</strong> ${user.surname}</div>
             <div class="col-md-4 text-center"><strong>Email</strong> ${user.email}</div>
             <div class="col-md-4 text-center"><strong>Password</strong> ${user.password}</div>
-            <div class="col-md-4 text-center"><strong>Type</strong> ${user.type}</div>
+            <div class="col-md-4 text-center"><strong>Type</strong> ${user.type     }</div>
             <div class="col-md-4 text-center"><strong>Chosen plan</strong> ${user.plan.desc}</div>
         </div>
     </div>

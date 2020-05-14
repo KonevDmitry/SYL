@@ -55,9 +55,8 @@ public class UserModel {
 
     @JsonBackReference
     @Fetch(FetchMode.JOIN)
-    @ManyToOne(fetch = FetchType.EAGER,
-                cascade = CascadeType.ALL)
-    @JoinColumn(name = "plan_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plan_id", insertable = false)
 
     private PlanModel plan;
 }

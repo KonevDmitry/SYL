@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import SYL.Utils.HibernateSessionFactoryUtil;
 
 import javax.persistence.NoResultException;
+import javax.transaction.Transactional;
 import java.util.List;
 
 

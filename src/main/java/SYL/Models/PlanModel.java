@@ -49,10 +49,8 @@ public class PlanModel {
     @OneToMany(
             mappedBy = "plan",
             targetEntity = UserModel.class,
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.PERSIST,
+            cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-
     private List<UserModel> users = new ArrayList<>();
 }
