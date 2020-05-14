@@ -1,6 +1,5 @@
 package SYL.Controllers;
 
-import SYL.Models.Login;
 import SYL.Models.PlanModel;
 import SYL.Models.UserModel;
 import SYL.Services.PlanService;
@@ -22,7 +21,7 @@ public class UserRestController {
     //ATTENTION!!! Users plans not printed to json (if you will need them), but easily could be got by getters
     // I have no idea how to edit it to json
 
-    @RequestMapping(value = "/users/get_all", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/users/getAll", method = RequestMethod.GET, produces = {"application/json"})
     public ModelAndView getPersons() {
         ModelAndView mv = new ModelAndView();
         mv.addObject("users", userService.getAll());
@@ -61,17 +60,4 @@ public class UserRestController {
         }
     }
 
-    @RequestMapping(value = "user/updateInfo/{id}", method = {RequestMethod.GET})
-    public ModelAndView updateInfo(@PathVariable("id") int id) {
-        UserModel user = userService.getUserByID(id);
-        ModelAndView mav = new ModelAndView("update");
-        mav.addObject("user", user);
-        return mav;
-    }
-
-    @RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("user") UserModel user) {
-        userService.updateInfo(user);
-        return new ModelAndView("welcome", "firstname", user.getName());
-    }
 }

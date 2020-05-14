@@ -18,8 +18,8 @@ public class PlanService {
         planDAO.save(plan);
     }
 
-    public void deletePlan(PlanModel plan) {
-        planDAO.delete(plan);
+    public void deletePlan(long id) {
+        planDAO.delete(id);
     }
 
     public void updatePlan(PlanModel plan) {
