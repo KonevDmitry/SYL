@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  docker-influxdb-grafana:
+    image: philhawthorne/docker-influxdb-grafana:latest
+    volumes:
+      - ./environment/influxdb:/var/lib/influxdb
+      - ./environment/grafana:/var/lib/grafana
+    ports:
+      - 3003:3003 # grafana
+      - 3004:8083 # chronograf
+      - 8086:8086 # influxdb
