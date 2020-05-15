@@ -2,6 +2,7 @@ package SYL.Services;
 
 
 import SYL.Dao.UserDao;
+import SYL.Models.OrderModel;
 import SYL.Models.PlanModel;
 import SYL.Models.UserModel;
 import org.springframework.stereotype.Repository;
@@ -42,4 +43,6 @@ public class UserService {
     public UserModel loggedUser(String email) {
         return usersDao.getByEmail(email);
     }
+
+    public void addOrder(OrderModel order){ usersDao.addOrder(order);}
 }

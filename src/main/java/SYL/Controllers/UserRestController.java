@@ -71,7 +71,7 @@ public class UserRestController {
             e.printStackTrace();
         }
 
-        return new ModelAndView("redirect:/users/get_all");
+        return new ModelAndView("redirect:/users/getAll");
     }
 
     @RequestMapping(value = "user/updatePlan/{id}/{pid}", method = {RequestMethod.POST, RequestMethod.GET})
