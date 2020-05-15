@@ -31,7 +31,7 @@ public class UserRestController {
     //ATTENTION!!! Users plans not printed to json (if you will need them), but easily could be got by getters
     // I have no idea how to edit it to json
 
-    @RequestMapping(value = "/users/get_all", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/users/getAll", method = RequestMethod.GET, produces = {"application/json"})
     public ModelAndView getPersons() {
         List<UserModel> users = new ArrayList<>();
 
@@ -110,27 +110,4 @@ public class UserRestController {
         }
     }
 
-    @RequestMapping(value = "user/updateInfo/{id}", method = {RequestMethod.GET})
-    public ModelAndView updateInfo(@PathVariable("id") int id) {
-        UserModel user;
-
-        try (ProfiledCall call = profiler.profiledCall("get_user_by_id")) {
-            call.start();
-            user = userService.getUserByID(id);
-            call.stop();
-        }
-
-        return new ModelAndView("update").addObject("user", user);
-    }
-
-    @RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("user") UserModel user) {
-        try (ProfiledCall call = profiler.profiledCall("user_update_info")) {
-            call.start();
-            userService.updateInfo(user);
-            call.stop();
-        }
-
-        return new ModelAndView("welcome", "firstname", user.getName());
-    }
 }

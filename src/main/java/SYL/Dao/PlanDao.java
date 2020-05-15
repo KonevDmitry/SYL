@@ -21,7 +21,8 @@ public class PlanDao {
         return (PlanModel) HibernateSessionFactoryUtil.getSessionFactory().openSession().get(PlanModel.class, id);
     }
 
-    public void delete(PlanModel plan) {
+    public void delete(long id) {
+        PlanModel plan = getByID(id);
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
         for (UserModel user : plan.getUsers()) {
@@ -46,12 +47,10 @@ public class PlanDao {
     public List<PlanModel> getAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
 
-        List<PlanModel> res = session.createNativeQuery("SELECT p.id, p.desc, p.cost" +
+        List<PlanModel> res = session.createNativeQuery("SELECT p.id, p.description, p.cost, p.priveleges" +
                 " FROM sylschema.plans p", PlanModel.class)
                 .getResultList();
 
-        session.flush();
-        session.close();
         return res;
     }
 

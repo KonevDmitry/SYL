@@ -6,7 +6,7 @@
     <title>Updating</title>
 </head>
 <body>
-<form:form id="regForm" modelAttribute="user" action="updateProcess" method="post">
+<form:form id="regForm" modelAttribute="user" action="updateInfoProcess" method="post">
     <table align="center">
         <tr>
             <td>

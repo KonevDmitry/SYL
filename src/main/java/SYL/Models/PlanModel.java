@@ -3,8 +3,6 @@ package SYL.Models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
@@ -36,9 +34,8 @@ public class PlanModel {
     private Integer cost;
 
     @NonNull
-    @Column(name = "desc")
+    @Column(name = "description")
     private String desc;
-
 
     @CollectionTable(name="plans", joinColumns=@JoinColumn(name="id"))
     @Column(name="priveleges", columnDefinition = "text array")
