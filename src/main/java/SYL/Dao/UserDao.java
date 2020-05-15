@@ -1,5 +1,6 @@
 package SYL.Dao;
 
+import SYL.Models.OrderModel;
 import SYL.Models.PlanModel;
 import SYL.Models.UserModel;
 import org.hibernate.Session;
@@ -7,11 +8,11 @@ import org.hibernate.Transaction;
 import SYL.Utils.HibernateSessionFactoryUtil;
 
 import javax.persistence.NoResultException;
-import javax.transaction.Transactional;
 import java.util.List;
 
 
 public class UserDao {
+    private OrderDao orderDao = new OrderDao();
 
     public UserModel getByID(long id) {
         return (UserModel) HibernateSessionFactoryUtil.getSessionFactory().openSession().get(UserModel.class, id);
@@ -103,5 +104,9 @@ public class UserDao {
                 .setParameter(1, email)
                 .getSingleResult();
         return user;
+    }
+
+    public void addOrder(OrderModel order){
+        orderDao.save(order);
     }
 }

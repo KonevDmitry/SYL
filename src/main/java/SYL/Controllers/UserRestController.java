@@ -40,7 +40,7 @@ public class UserRestController {
     @RequestMapping(value = "/user/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
     public ModelAndView deletePerson(@PathVariable("id") int id) {
         userService.deleteUser(id);
-        return new ModelAndView("redirect:/users/get_all");
+        return new ModelAndView("redirect:/users/getAll");
     }
 
     @RequestMapping(value = "user/updatePlan/{id}/{pid}", method = {RequestMethod.POST, RequestMethod.GET})

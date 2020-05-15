@@ -23,7 +23,7 @@ public class PlanRestController {
         return mv;
     }
 
-    @RequestMapping(value = "/plans/get_all", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/plans/getAll", method = RequestMethod.GET, produces = {"application/json"})
     public ModelAndView getPlans() {
         ModelAndView mv = new ModelAndView();
         mv.addObject("plans", planService.getAll());
@@ -58,7 +58,7 @@ public class PlanRestController {
     @RequestMapping(value = "/plan/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
     public ModelAndView deletePlan(@PathVariable("id") int id) {
         planService.deletePlan(id);
-        return new ModelAndView("redirect:/plans/get_all");
+        return new ModelAndView("redirect:/plans/getAll");
     }
 
     @RequestMapping(value = "/addPlan", method = RequestMethod.GET)
