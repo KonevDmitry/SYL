@@ -93,8 +93,8 @@
         </dependency>
         <dependency>
             <groupId>ru.fix</groupId>
-            <artifactId>aggregating-profiler-prometheus</artifactId>
-            <version>1.5.19</version>
+            <artifactId>aggregating-profiler</artifactId>
+            <version>1.4.13</version>
         </dependency>
         <dependency>
             <groupId>org.influxdb</groupId>
