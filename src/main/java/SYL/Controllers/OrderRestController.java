@@ -15,18 +15,12 @@ public class OrderRestController {
 
     @RequestMapping(value = "/orders/getAll", method = RequestMethod.GET, produces = {"application/json"})
     public ModelAndView getPersons() {
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("orders", orderService.getAll());
-        mv.setViewName("AllOrders");
-        return mv;
+        return new ModelAndView("AllOrders").addObject("orders", orderService.getAll());
     }
 
     @RequestMapping(value = "/order/get/{id}", method = RequestMethod.GET)
     public ModelAndView getPerson(@PathVariable("id") long id) {
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("order", orderService.getOrderByID(id));
-        mv.setViewName("OrderInfo");
-        return mv;
+        return new ModelAndView("OrderInfo").addObject("order", orderService.getOrderByID(id));
     }
 
     @RequestMapping(value = "/order/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
@@ -37,25 +31,17 @@ public class OrderRestController {
 
     @RequestMapping(value = "/orders/getUserOrders/{id}", method = RequestMethod.GET, produces = {"application/json"})
     public ModelAndView getPersons(@PathVariable("id") long id) {
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("orders", orderService.getUserOrders(id));
-        mv.setViewName("AllOrders");
-        return mv;
+        return new ModelAndView("AllOrders").addObject("orders", orderService.getUserOrders(id));
     }
 
     @RequestMapping(value = "/addOrder", method = RequestMethod.GET)
     public ModelAndView showRegister() {
-        ModelAndView mav = new ModelAndView("order");
-        mav.addObject("order", new OrderModel());
-        return mav;
+        return new ModelAndView("order").addObject("order", new OrderModel());
     }
 
     @RequestMapping(value = "/orderProcess", method = RequestMethod.POST)
     public ModelAndView addUser(@ModelAttribute("order") OrderModel order) {
         orderService.saveOrder(order);
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("orders", orderService.getAll());
-        mv.setViewName("AllOrders");
-        return mv;
+        return new ModelAndView("AllOrders").addObject("orders", orderService.getAll());
     }
 }
