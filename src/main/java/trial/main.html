@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SYL</title>
+    <link rel="stylesheet" href="mainstyle.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <main class="wrapper">
+      <div class="back">
+        <img src="user.png" />
+        <p class="welcome-message">Welcome, <b>User</b></p>
+        <button id="button-info">My Info</button>
+        <button id="button-plan">Select Plan</button>
+        <button id="button-service">Service Required</button>
+        <p class="message"><a href="#">Logout</a></p>
+      </div>
+    </main>
+
+    <main class="wrapper">
+      <div class="plan">
+        <p class="select-message">
+          You can select a heath support plan below:
+        </p>
+
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <th class="hide"></th>
+
+                <th class="bg-purple">
+                  <input
+                    type="radio"
+                    class="custom-radio"
+                    id="basic"
+                    name="select"
+                    value="basic"
+                    checked
+                  />
+
+                  <label for="basic">Basic</label>
+                </th>
+
+                <th class="bg-blue">
+                  <input
+                    type="radio"
+                    class="custom-radio"
+                    id="premium"
+                    name="select"
+                    value="premium"
+                  />
+                  <label for="premium">Premium</label>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monthly price</td>
+                <td>
+                  <span class="txt-top">&#8381;</span
+                  ><span class="txt-l">5 000</span>
+                </td>
+                <td>
+                  <span class="txt-top">&#8381;</span
+                  ><span class="txt-l">20 000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3" class="sep">Get started</td>
+              </tr>
+              <tr>
+                <td>First aid and outcalls in urgent cases</td>
+                <td><span class="tick">&#10004;</span></td>
+                <td><span class="tick">&#10004;</span></td>
+              </tr>
+              <tr>
+                <td>Free consultation 24 hours a day</td>
+                <td><span class="tick">&#10004;</span></td>
+                <td><span class="tick">&#10004;</span></td>
+              </tr>
+              <tr>
+                <td>Yearly sanatorium in your county</td>
+                <td></td>
+                <td><span class="tick">&#10004;</span></td>
+              </tr>
+              <tr>
+                <td>Treatment in the best hostipal of your region</td>
+                <td><span class="tick">&#10004;</span></td>
+                <td><span class="tick">&#10004;</span></td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td>Treatment by exprienced specialists of Europe</td>
+                <td></td>
+                <td><span class="tick">&#10004;</span></td>
+              </tr>
+              <tr>
+                <td>Help in terms of mental health</td>
+                <td></td>
+                <td><span class="tick">&#10004;</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="return-message">
+          Want to return to the previous page? <a href="#">Back</a>
+        </p>
+      </div>
+    </main>
+
+    <main class="wrapper">
+      <div class="service">
+        <p class="service-message">Select a service:</p>
+        <input
+          type="radio"
+          class="custom-radio"
+          id="consult"
+          name="select"
+          value="consult"
+        />
+        <label for="consult">Free consultation</label>
+        <input
+          type="radio"
+          class="custom-radio"
+          id="outcall"
+          name="select"
+          value="outcall"
+        />
+        <label for="outcall">First aid / Outcall</label>
+        <input
+          type="radio"
+          class="custom-radio"
+          id="treatment"
+          name="select"
+          value="treatment"
+        />
+        <label for="treatment">Treatment in my city</label>
+        <button id="button-service-send">Send</button>
+        <p class="service-return">
+          Want to return to the previous page? <a href="#">Back</a>
+        </p>
+      </div>  
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script>
+      $("#button-plan, .return-message a").click(function () {
+        $(".back, .plan").animate(
+          {
+            height: "toggle",
+            opacity: "toggle",
+          },
+          "slow"
+        );
+      });
+    </script>
+
+    <script>
+      $("#button-service, #button-service-send, .service-return a").click(function () {
+        $(".back, .service").animate(
+          {
+            height: "toggle",
+            opacity: "toggle",
+          },
+          "slow"
+        );
+      });
+    </script>
+  </body>
+</html>
