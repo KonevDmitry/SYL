@@ -22,7 +22,7 @@ public class UserRestController {
 
     @RequestMapping(value = "/users/getAll", method = RequestMethod.GET, produces = {"application/json"})
     public ModelAndView getPersons() {
-        return new ModelAndView("AllUsers")
+        return new ModelAndView("/AllUsers")
                 .addObject("users", userService.getAll());
     }
 

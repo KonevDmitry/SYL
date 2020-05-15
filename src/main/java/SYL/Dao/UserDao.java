@@ -42,7 +42,8 @@ public class UserDao {
         UserModel user = getByID(id);
         PlanModel userPlan = user.getPlan();
 
-        userPlan.getUsers().remove(user);
+        if (userPlan!=null)
+            userPlan.getUsers().remove(user);
         user.setPlan(null);
 
         session.delete(user);
